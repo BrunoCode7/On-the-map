@@ -10,11 +10,21 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
 
-
+    @IBAction func clickSignIn(_ sender: Any) {
+        UdacityClient.taskForPOSTMethod(username: emailTextField.text!, password: passwordTextField.text!) { (jsonData, error) in
+            DispatchQueue.main.async {
+                print(jsonData.debugDescription + "loginCV")
+            }
+        }
+    }
 }
 
