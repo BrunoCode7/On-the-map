@@ -7,12 +7,31 @@
 //
 
 import Foundation
+struct UdacityLoginSession: Decodable {
+    let account: Account
+    let session: Session
+    
+    
+}
+struct Account :Decodable{
+    let registered: Bool
+    let key: String
+    
+}
+struct Session :Decodable{
+    let id: String
+    let expiration: String
+}
 
+public struct UdacityClientConstants {
+    static var userLoginSession :UdacityLoginSession? = nil
+}
 class UdacityClient{
     
     
     
-    static func taskForPOSTMethod(username:String, password: String, completionHandlerForPOST: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void){
+    
+    static func taskForPOSTMethod(username:String, password: String, completionHandlerForPOST: @escaping (_ result: UdacityLoginSession?, _ error: NSError?) -> Void){
         
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "POST"
@@ -50,16 +69,16 @@ class UdacityClient{
             
             let newData = data.subdata(in: range)
             
-            let parsedResult: AnyObject!
             
             do {
+                let loginSession = try JSONDecoder().decode(UdacityLoginSession.self,from: newData)
+                print(loginSession.account)
+                completionHandlerForPOST(loginSession,nil)
                 
-                parsedResult = try JSONSerialization.jsonObject(with: newData, options: .allowFragments) as! AnyObject
-                completionHandlerForPOST(parsedResult,nil)
             } catch {
                 print(error.localizedDescription)
             }
-
+            
         }
         task.resume()
     }

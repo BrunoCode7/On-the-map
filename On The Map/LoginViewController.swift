@@ -20,9 +20,10 @@ class LoginViewController: UIViewController {
     }
 
     @IBAction func clickSignIn(_ sender: Any) {
-        UdacityClient.taskForPOSTMethod(username: emailTextField.text!, password: passwordTextField.text!) { (jsonData, error) in
+        UdacityClient.taskForPOSTMethod(username: emailTextField.text!, password: passwordTextField.text!) { (loginSession, error) in
             DispatchQueue.main.async {
-                print(jsonData.debugDescription + "loginCV")
+                  UdacityClientConstants.userLoginSession = loginSession
+                print("Task completed")
             }
         }
     }
