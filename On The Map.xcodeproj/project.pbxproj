@@ -13,6 +13,8 @@
 		4555EC4F225E01C500A89DF5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4555EC4E225E01C500A89DF5 /* Assets.xcassets */; };
 		4555EC52225E01C500A89DF5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4555EC50225E01C500A89DF5 /* LaunchScreen.storyboard */; };
 		459BD8CE225F4BE000A50E96 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BD8CD225F4BE000A50E96 /* UdacityClient.swift */; };
+		ED1928D722703563008FDC28 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1928D622703563008FDC28 /* MapViewController.swift */; };
+		ED1928D922703594008FDC28 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1928D822703594008FDC28 /* TableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		4555EC51225E01C500A89DF5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4555EC53225E01C500A89DF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		459BD8CD225F4BE000A50E96 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
+		ED1928D622703563008FDC28 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		ED1928D822703594008FDC28 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				4555EC4E225E01C500A89DF5 /* Assets.xcassets */,
 				4555EC50225E01C500A89DF5 /* LaunchScreen.storyboard */,
 				4555EC53225E01C500A89DF5 /* Info.plist */,
+				ED1928D622703563008FDC28 /* MapViewController.swift */,
+				ED1928D822703594008FDC28 /* TableViewController.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -165,6 +171,8 @@
 				4555EC4A225E018A00A89DF5 /* LoginViewController.swift in Sources */,
 				4555EC48225E018A00A89DF5 /* AppDelegate.swift in Sources */,
 				459BD8CE225F4BE000A50E96 /* UdacityClient.swift in Sources */,
+				ED1928D922703594008FDC28 /* TableViewController.swift in Sources */,
+				ED1928D722703563008FDC28 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

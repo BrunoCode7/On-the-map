@@ -23,6 +23,7 @@ class LoginViewController: UIViewController {
         UdacityClient.taskForPOSTMethod(username: emailTextField.text!, password: passwordTextField.text!) { (loginSession, error) in
             DispatchQueue.main.async {
                   UdacityClientConstants.userLoginSession = loginSession
+    
                 print("Task completed")
             }
         }
