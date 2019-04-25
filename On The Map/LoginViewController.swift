@@ -36,6 +36,9 @@ class LoginViewController: UIViewController {
                         print("wrong credintials")
                         //wrong credintials
                         self.showSimpleAlert("Error", "Wrong credintials")
+                    }else if errorCode == 400{
+                        print("Empty username and PW textFields")
+                        self.showSimpleAlert("Error", "Please enter your Email & password")
                     }
                 }
                 print("Task completed")
