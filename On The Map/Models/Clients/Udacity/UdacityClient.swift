@@ -7,18 +7,18 @@
 //
 
 import Foundation
-struct UdacityLoginSession: Decodable {
+struct UdacityLoginSession: Codable {
     let account: Account
     let session: Session
     
     
 }
-struct Account :Decodable{
+struct Account :Codable{
     let registered: Bool
     let key: String
     
 }
-struct Session :Decodable{
+struct Session :Codable{
     let id: String
     let expiration: String
 }
@@ -31,7 +31,7 @@ class UdacityClient{
     
     
     
-    static func taskForPOSTMethod(username:String, password: String, completionHandlerForPOST: @escaping (_ result: UdacityLoginSession?, _ error: NSError?) -> Void){
+    static func taskForPOSTMethod(username:String, password: String, completionHandlerForPOST: @escaping (_ result: UdacityLoginSession?, _ errorCode: Int?) -> Void){
         
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "POST"
@@ -41,27 +41,28 @@ class UdacityClient{
         request.httpBody = "{\"udacity\": {\"username\": \"\(username)\", \"password\": \"\(password)\"}}".data(using: .utf8)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
-            func sendError(_ error: String) {
+            func sendError(_ error: String,_ errorCode:Int?) {
                 print(error)
                 let userInfo = [NSLocalizedDescriptionKey : error]
-                completionHandlerForPOST(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
+                completionHandlerForPOST(nil, errorCode)
             }
             
             /* GUARD: Was there an error? */
             guard (error == nil) else {
-                sendError("There was an error with your request: \(error!)")
+                //network connection error
+                sendError("There was an error with your request: \(error!)",nil)
                 return
             }
             
             /* GUARD: Did we get a successful 2XX response? */
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-                sendError("Your request returned a status code other than 2xx! it is = \(String(describing: (response as! HTTPURLResponse).statusCode))")
+                sendError("Your request returned a status code other than 2xx! it is = \(String(describing: (response as! HTTPURLResponse).statusCode))",((response as? HTTPURLResponse)?.statusCode)!)
                 return
             }
             
             /* GUARD: Was there any data returned? */
             guard let data = data else {
-                sendError("No data was returned by the request!")
+                sendError("No data was returned by the request!",nil)
                 return
             }
             print("this is data = \(String(describing: data)) and this is response = \(String(describing: response))")
