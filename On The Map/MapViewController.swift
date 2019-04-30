@@ -27,7 +27,7 @@ class MapViewController: UIViewController {
     }
     */
     @IBAction func signOutButton(_ sender: Any) {
-        UdacityClient.taskForDELETEMethod(sessionId: (UdacityClientConstants.userLoginSession!.session.id)){(deleteSession,errorCode)in
+        UdacityClient.taskForDELETEMethod(){(deleteSession,errorCode)in
             
             DispatchQueue.main.async {
                 if (deleteSession) != nil{

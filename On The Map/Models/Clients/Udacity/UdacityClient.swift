@@ -19,13 +19,11 @@ struct Account :Codable{
     
 }
 struct Session :Codable{
-    let id: String
-    let expiration: String
+    let id: String?
+    let expiration: String?
 }
 
-public struct UdacityClientConstants {
-    static var userLoginSession :UdacityLoginSession? = nil
-}
+
 class UdacityClient{
     
     
@@ -85,8 +83,8 @@ class UdacityClient{
     
     
     // function to delete and logout from Udacity Api
-    static func taskForDELETEMethod(sessionId:String, completionHandlerForDELETE: @escaping (_ result: Session?, _ errorCode: Int?) -> Void){
-        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/\(sessionId)")!)
+    static func taskForDELETEMethod(completionHandlerForDELETE: @escaping (_ result: Session?, _ errorCode: Int?) -> Void){
+        var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
         let sharedCookieStorage = HTTPCookieStorage.shared

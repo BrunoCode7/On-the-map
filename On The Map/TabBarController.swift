@@ -18,6 +18,10 @@ class TabBarController: UITabBarController {
         }
     }
     
+    override func viewDidLoad() {
+        <#code#>
+    }
+    
     
     private func isLoggedIn()->Bool{
         return UserDefaults.standard.bool(forKey: "isLoggedIn")

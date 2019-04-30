@@ -22,7 +22,6 @@ class LoginViewController: UIViewController {
     @IBAction func clickSignIn(_ sender: Any) {
         UdacityClient.taskForPOSTMethod(username: emailTextField.text!, password: passwordTextField.text!) { (loginSession, errorCode) in
             DispatchQueue.main.async {
-                UdacityClientConstants.userLoginSession = loginSession
                 if (loginSession?.account.registered) != nil{
                     self.performSegue(withIdentifier: "signedIn", sender: self)
                     UserDefaults.standard.set(true, forKey: "isLoggedIn")
