@@ -7,6 +7,16 @@
 //
 
 import Foundation
+
+struct UdacityUser:Codable {
+    let user:User
+}
+
+struct User:Codable {
+    let last_name:String
+    let first_name:String
+    
+}
 struct UdacityLoginSession: Codable {
     let account: Account
     let session: Session
@@ -72,7 +82,6 @@ class UdacityClient{
                 let loginSession = try JSONDecoder().decode(UdacityLoginSession.self,from: newData)
                 print(loginSession.account)
                 completionHandlerForPOST(loginSession,nil)
-                
             } catch {
                 print(error.localizedDescription)
             }
@@ -138,4 +147,52 @@ class UdacityClient{
         task.resume()
         
     }
+    
+    
+    static func taskForGETMethod(userId:String, completionHandlerForGET: @escaping (_ result: UdacityUser?, _ errorCode: Int?) -> Void){
+        let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/users/\(userId)")!)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request) { data, response, error in
+            func sendError(_ error: String,_ errorCode:Int?) {
+                print(error)
+                completionHandlerForGET(nil, errorCode)
+            }
+            
+            /* GUARD: Was there an error? */
+            guard (error == nil) else {
+                //network connection error
+                sendError("There was an error with your request: \(error!)",nil)
+                return
+            }
+            
+            /* GUARD: Did we get a successful 2XX response? */
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                sendError("Your request returned a status code other than 2xx! it is = \(String(describing: (response as! HTTPURLResponse).statusCode))",((response as? HTTPURLResponse)?.statusCode)!)
+                return
+            }
+            
+            /* GUARD: Was there any data returned? */
+            guard let data = data else {
+                sendError("No data was returned by the request!",nil)
+                return
+            }
+            print("this is data = \(String(describing: data)) and this is response = \(String(describing: response))")
+            let range = Range(5..<data.count)
+            
+            let newData = data.subdata(in: range)
+            
+            
+            do {
+                let userData = try JSONDecoder().decode(UdacityUser.self,from: newData)
+                print(userData.user.first_name)
+                completionHandlerForGET(userData,nil)
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        }
+        task.resume()
+    }
+    
+    
 }

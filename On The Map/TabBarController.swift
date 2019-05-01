@@ -17,10 +17,7 @@ class TabBarController: UITabBarController {
             performSegue(withIdentifier: "signIn", sender: self)
         }
     }
-    
-    override func viewDidLoad() {
-        <#code#>
-    }
+
     
     
     private func isLoggedIn()->Bool{
