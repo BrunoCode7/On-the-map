@@ -7,25 +7,55 @@
 //
 
 import UIKit
+import MapKit
+class MapViewController: UIViewController, MKMapViewDelegate {
 
-class MapViewController: UIViewController {
-
+    @IBOutlet weak var mapView: MKMapView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        mapView.delegate = self
         // Do any additional setup after loading the view.
+        getAndShowStudentsLocation()
+    }
+
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            if let toOpen = view.annotation?.subtitle! {
+                app.openURL(URL(string: toOpen)!)
+            }
+        }
     }
-    */
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     @IBAction func signOutButton(_ sender: Any) {
         UdacityClient.taskForDELETEMethod(){(deleteSession,errorCode)in
             
@@ -62,6 +92,45 @@ class MapViewController: UIViewController {
         }
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func getAndShowStudentsLocation(){
+
+        ParseClient.getMethodForStudentsLocation(){
+            (response,errorCode) in
+            DispatchQueue.main.async {
+                if response != nil {
+                    self.showLocationsOnMap(locations: response!, theMapview: self.mapView)
+                }else{
+                    self.showSimpleAlert("Error", "Please check your internet connection")
+                }
+            }
+        }
+    }
+    
+    private func showLocationsOnMap(locations:locationResponse, theMapview:MKMapView){
+        let locations = locations.results
+        var annotations = [MKPointAnnotation]()
+        
+        for location in locations {
+            let lat = CLLocationDegrees(exactly: location.latitude!)
+            let long = CLLocationDegrees(exactly: location.longitude!)
+            
+            let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+            
+            let firstName = location.firstName!
+            let lastName = location.lastName!
+            let mediaURL = location.mediaURL!
+            
+            let annotation = MKPointAnnotation()
+            annotation.coordinate = coordinate
+            annotation.title = "\(firstName) \(lastName)"
+            annotation.subtitle = mediaURL
+            
+            annotations.append(annotation)
+            
+        }
+        theMapview.addAnnotations(annotations)
     }
 
 }

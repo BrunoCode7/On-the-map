@@ -184,6 +184,9 @@
                         <viewLayoutGuide key="safeArea" id="YSu-WH-V4x"/>
                     </view>
                     <tabBarItem key="tabBarItem" image="icon_mapview-deselected" selectedImage="icon_mapview-selected" id="tui-xa-UlI"/>
+                    <connections>
+                        <outlet property="mapView" destination="6z0-QK-WSK" id="l2b-eR-I5O"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qj6-8v-W6J" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
