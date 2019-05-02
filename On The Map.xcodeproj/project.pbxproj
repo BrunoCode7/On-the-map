@@ -17,6 +17,7 @@
 		ED1928D922703594008FDC28 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1928D822703594008FDC28 /* TableViewController.swift */; };
 		ED1928DB2271B130008FDC28 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1928DA2271B130008FDC28 /* TabBarController.swift */; };
 		EDC6F88822796BFC00127255 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F88722796BFC00127255 /* ParseClient.swift */; };
+		EDC6F88A2279E6B400127255 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F8892279E6B400127255 /* TableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		ED1928D822703594008FDC28 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		ED1928DA2271B130008FDC28 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EDC6F88722796BFC00127255 /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
+		EDC6F8892279E6B400127255 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				ED1928D622703563008FDC28 /* MapViewController.swift */,
 				ED1928D822703594008FDC28 /* TableViewController.swift */,
 				ED1928DA2271B130008FDC28 /* TabBarController.swift */,
+				EDC6F8892279E6B400127255 /* TableViewCell.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4555EC4A225E018A00A89DF5 /* LoginViewController.swift in Sources */,
+				EDC6F88A2279E6B400127255 /* TableViewCell.swift in Sources */,
 				4555EC48225E018A00A89DF5 /* AppDelegate.swift in Sources */,
 				EDC6F88822796BFC00127255 /* ParseClient.swift in Sources */,
 				459BD8CE225F4BE000A50E96 /* UdacityClient.swift in Sources */,
