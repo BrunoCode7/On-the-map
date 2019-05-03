@@ -55,6 +55,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     
     
+    @IBAction func refreshMap(_ sender: Any) {
+        getAndShowStudentsLocation()
+    }
     
     @IBAction func signOutButton(_ sender: Any) {
         UdacityClient.taskForDELETEMethod(){(deleteSession,errorCode)in
@@ -62,8 +65,6 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             DispatchQueue.main.async {
                 if (deleteSession) != nil{
                     self.view.window?.rootViewController?.presentedViewController!.dismiss(animated: true, completion: nil)
-                    UserDefaults.standard.set(false, forKey: "isLoggedIn")
-                    UserDefaults.standard.synchronize()
                 }else{
                     if errorCode==nil{
                         print("problem connecting to server")
@@ -118,19 +119,35 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
             
-            let firstName = location.firstName!
-            let lastName = location.lastName!
-            let mediaURL = location.mediaURL!
-            
             let annotation = MKPointAnnotation()
+
+            if let firstName = location.firstName,let lastName = location.lastName{
+                            annotation.title = "\(firstName) \(lastName)"
+            }else{
+                annotation.title = ""
+            }
+            
+            if let mediaURL = location.mediaURL{
+                annotation.subtitle = mediaURL
+            }else{
+                annotation.subtitle = ""
+
+            }
+            
             annotation.coordinate = coordinate
-            annotation.title = "\(firstName) \(lastName)"
-            annotation.subtitle = mediaURL
             
             annotations.append(annotation)
             
         }
+        if theMapview.annotations.count != 0 {
+            print("There are some annotations")
+            theMapview.removeAnnotations(theMapview.annotations)
+        }else{
+            print("There is no annotations")
+            theMapview.addAnnotations(annotations)
+        }
         theMapview.addAnnotations(annotations)
+
     }
 
 }

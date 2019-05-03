@@ -15,9 +15,10 @@
 		459BD8CE225F4BE000A50E96 /* UdacityClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BD8CD225F4BE000A50E96 /* UdacityClient.swift */; };
 		ED1928D722703563008FDC28 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1928D622703563008FDC28 /* MapViewController.swift */; };
 		ED1928D922703594008FDC28 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1928D822703594008FDC28 /* TableViewController.swift */; };
-		ED1928DB2271B130008FDC28 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1928DA2271B130008FDC28 /* TabBarController.swift */; };
 		EDC6F88822796BFC00127255 /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F88722796BFC00127255 /* ParseClient.swift */; };
 		EDC6F88A2279E6B400127255 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F8892279E6B400127255 /* TableViewCell.swift */; };
+		EDC6F88C227C6E4D00127255 /* FindLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F88B227C6E4D00127255 /* FindLocationViewController.swift */; };
+		EDC6F88E227C6E9B00127255 /* PostLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC6F88D227C6E9B00127255 /* PostLocationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,9 +32,10 @@
 		459BD8CD225F4BE000A50E96 /* UdacityClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdacityClient.swift; sourceTree = "<group>"; };
 		ED1928D622703563008FDC28 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		ED1928D822703594008FDC28 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		ED1928DA2271B130008FDC28 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		EDC6F88722796BFC00127255 /* ParseClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		EDC6F8892279E6B400127255 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		EDC6F88B227C6E4D00127255 /* FindLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindLocationViewController.swift; sourceTree = "<group>"; };
+		EDC6F88D227C6E9B00127255 /* PostLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostLocationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +77,9 @@
 				4555EC53225E01C500A89DF5 /* Info.plist */,
 				ED1928D622703563008FDC28 /* MapViewController.swift */,
 				ED1928D822703594008FDC28 /* TableViewController.swift */,
-				ED1928DA2271B130008FDC28 /* TabBarController.swift */,
 				EDC6F8892279E6B400127255 /* TableViewCell.swift */,
+				EDC6F88B227C6E4D00127255 /* FindLocationViewController.swift */,
+				EDC6F88D227C6E9B00127255 /* PostLocationViewController.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -188,10 +191,11 @@
 				4555EC4A225E018A00A89DF5 /* LoginViewController.swift in Sources */,
 				EDC6F88A2279E6B400127255 /* TableViewCell.swift in Sources */,
 				4555EC48225E018A00A89DF5 /* AppDelegate.swift in Sources */,
+				EDC6F88C227C6E4D00127255 /* FindLocationViewController.swift in Sources */,
 				EDC6F88822796BFC00127255 /* ParseClient.swift in Sources */,
 				459BD8CE225F4BE000A50E96 /* UdacityClient.swift in Sources */,
-				ED1928DB2271B130008FDC28 /* TabBarController.swift in Sources */,
 				ED1928D922703594008FDC28 /* TableViewController.swift in Sources */,
+				EDC6F88E227C6E9B00127255 /* PostLocationViewController.swift in Sources */,
 				ED1928D722703563008FDC28 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

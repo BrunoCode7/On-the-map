@@ -33,9 +33,17 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! TableViewCell
         let data = self.globalResponse[(indexPath as NSIndexPath).row]
+        if let firstName=data.firstName, let lastName = data.lastName{
+            cell.studentName.text = "\(firstName) \(lastName)"
+        }else{
+            cell.studentName.text = ""
+        }
         
-        cell.studentName.text = "\(data.firstName!) \(data.lastName!)"
-        cell.studentURL.text = data.mediaURL!
+        if let studentURL=data.mediaURL{
+            cell.studentURL.text = studentURL
+        }else{
+            cell.studentURL.text = ""
+        }
         return cell
     }
     
@@ -78,6 +86,9 @@ class TableViewController: UITableViewController {
     
     
     
+    @IBAction func refreshTableData(_ sender: Any) {
+        getAndShowStudentsLocation()
+    }
     
     
     @IBAction func signOutButton(_ sender: Any) {
@@ -86,8 +97,6 @@ class TableViewController: UITableViewController {
             DispatchQueue.main.async {
                 if (deleteSession) != nil{
                     self.view.window?.rootViewController?.presentedViewController!.dismiss(animated: true, completion: nil)
-                    UserDefaults.standard.set(false, forKey: "isLoggedIn")
-                    UserDefaults.standard.synchronize()
                 }else{
                     if errorCode==nil{
                         print("problem connecting to server")

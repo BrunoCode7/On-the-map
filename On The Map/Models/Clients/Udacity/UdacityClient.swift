@@ -15,12 +15,11 @@ struct UdacityUser:Codable {
 struct User:Codable {
     let last_name:String
     let first_name:String
-    
 }
+
 struct UdacityLoginSession: Codable {
     let account: Account
     let session: Session
-    
     
 }
 struct Account :Codable{
@@ -32,7 +31,9 @@ struct Session :Codable{
     let id: String?
     let expiration: String?
 }
-
+struct DeleteResponse : Codable{
+    let session:Session
+}
 
 class UdacityClient{
     
@@ -92,7 +93,7 @@ class UdacityClient{
     
     
     // function to delete and logout from Udacity Api
-    static func taskForDELETEMethod(completionHandlerForDELETE: @escaping (_ result: Session?, _ errorCode: Int?) -> Void){
+    static func taskForDELETEMethod(completionHandlerForDELETE: @escaping (_ result: DeleteResponse?, _ errorCode: Int?) -> Void){
         var request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/session")!)
         request.httpMethod = "DELETE"
         var xsrfCookie: HTTPCookie? = nil
@@ -135,8 +136,8 @@ class UdacityClient{
             
             
             do {
-                let deleteSession = try JSONDecoder().decode(Session.self,from: newData)
-                print(deleteSession.id)
+                let deleteSession = try JSONDecoder().decode(DeleteResponse.self,from: newData)
+                print(newData.debugDescription)
                 completionHandlerForDELETE(deleteSession,nil)
                 
             } catch {
