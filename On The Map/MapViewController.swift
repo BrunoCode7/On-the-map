@@ -58,7 +58,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     @IBAction func refreshMap(_ sender: Any) {
         getAndShowStudentsLocation()
     }
-    
+
     @IBAction func signOutButton(_ sender: Any) {
         UdacityClient.taskForDELETEMethod(){(deleteSession,errorCode)in
             

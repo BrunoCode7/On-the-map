@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -102,7 +102,6 @@
         <!--Title-->
         <scene sceneID="JHe-2d-X2n">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5Ug-PO-w1n" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="7g9-gZ-0Lf" customClass="TableViewController" customModule="On_The_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ao1-DZ-o2r">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -164,7 +163,7 @@
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="Q62-jl-vXc">
                                 <connections>
-                                    <segue destination="8AN-1M-SeI" kind="presentation" id="mxz-lw-My7"/>
+                                    <segue destination="8AN-1M-SeI" kind="presentation" id="NTD-N3-gHF"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem systemItem="refresh" id="ttT-HV-fNl">
@@ -179,6 +178,7 @@
                         <outlet property="tableView" destination="Ao1-DZ-o2r" id="wgJ-DX-poE"/>
                     </connections>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Ug-PO-w1n" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3598" y="482"/>
         </scene>
@@ -227,6 +227,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgA-Go-PnQ">
                                         <rect key="frame" x="0.0" y="238.5" width="300" height="45.5"/>
                                         <state key="normal" title="Find Location"/>
+                                        <connections>
+                                            <action selector="findLocationButton:" destination="BbT-fe-pP3" eventType="touchUpInside" id="ACF-f4-Pxw"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -253,6 +256,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="linkEditText" destination="lPB-cS-fSW" id="m9I-Uv-vMN"/>
+                        <outlet property="locationEditText" destination="ltm-9R-6eq" id="GYU-Zz-Y0H"/>
                         <segue destination="OVb-6c-FOQ" kind="show" identifier="findLocation" id="22s-87-2bf"/>
                     </connections>
                 </viewController>
@@ -335,7 +340,7 @@
                                         <rightBarButtonItems>
                                             <barButtonItem systemItem="add" id="MI8-SR-SeF">
                                                 <connections>
-                                                    <segue destination="8AN-1M-SeI" kind="presentation" id="fic-Sy-2I8"/>
+                                                    <segue destination="8AN-1M-SeI" kind="presentation" id="U8k-2Y-P8W"/>
                                                 </connections>
                                             </barButtonItem>
                                             <barButtonItem systemItem="refresh" id="skV-gv-PeH">
@@ -1153,6 +1158,6 @@ wVbEVtFW1lbeVuFW5lbuVvFXA1cGVwsAAAAAAAACAQAAAAAAAABZAAAAAAAAAAAAAAAAAABXDQ
         </image>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fic-Sy-2I8"/>
+        <segue reference="U8k-2Y-P8W"/>
     </inferredMetricsTieBreakers>
 </document>

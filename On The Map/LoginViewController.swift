@@ -24,6 +24,7 @@ class LoginViewController: UIViewController {
             DispatchQueue.main.async {
                 if (loginSession?.account.registered) != nil{
                     self.performSegue(withIdentifier: "signedIn", sender: self)
+                    UserDefaults.standard.set(loginSession?.account.key, forKey: "userUniqueKey")
                 }else{
                     if errorCode==nil{
                         print("problem connecting to server")
