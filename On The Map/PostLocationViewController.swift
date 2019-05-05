@@ -7,16 +7,57 @@
 //
 
 import UIKit
+import MapKit
 
-class PostLocationViewController: UIViewController {
+class PostLocationViewController: UIViewController,MKMapViewDelegate{
 
+    @IBOutlet weak var mapView: MKMapView!
+    var location = CLLocation()
+    var Link = String()
+    var Address = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        mapView.delegate = self
+            print(location)
+            print(Link)
+        var annotation = MKPointAnnotation()
+        annotation.coordinate = location.coordinate
+        annotation.subtitle = Address
+        let regionRadius: CLLocationDistance = 1000
+        let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.addAnnotation(annotation)
+        mapView.setRegion(coordinateRegion, animated: true)
         // Do any additional setup after loading the view.
     }
     
-
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        let reuseId = "pin"
+        
+        var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
+        
+        if pinView == nil {
+            pinView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
+            pinView!.canShowCallout = true
+            pinView!.pinColor = .red
+            pinView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+        }
+        else {
+            pinView!.annotation = annotation
+        }
+        
+        return pinView
+    }
+    
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        if control == view.rightCalloutAccessoryView {
+            let app = UIApplication.shared
+            if let toOpen = view.annotation?.subtitle! {
+                app.openURL(URL(string: toOpen)!)
+            }
+        }
+    }
     /*
     // MARK: - Navigation
 
@@ -27,4 +68,18 @@ class PostLocationViewController: UIViewController {
     }
     */
 
-}
+    @IBAction func fenishButton(_ sender: Any) {
+        let userUniqueKey = UserDefaults.standard.string(forKey: "userUniqueKey")
+        ParseClient.getMethodForSingleStudentLocation(studentUniqueID: userUniqueKey!) { (response, errorCode) in
+            if response != nil{
+                //already have data should update
+                
+            }else{
+                //first time posting data
+                
+            }
+        }
+    }
+    
+    }
+

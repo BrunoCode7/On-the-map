@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -210,27 +210,30 @@
                                 <rect key="frame" x="10" y="84" width="300" height="284"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="Rm7-Ny-cLa">
-                                        <rect key="frame" x="124" y="0.0" width="52" height="75"/>
+                                        <rect key="frame" x="124" y="0.0" width="52" height="62.5"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ltm-9R-6eq">
-                                        <rect key="frame" x="0.0" y="107" width="300" height="34"/>
+                                        <rect key="frame" x="0.0" y="94.5" width="300" height="28"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lPB-cS-fSW">
-                                        <rect key="frame" x="0.0" y="173" width="300" height="33.5"/>
+                                        <rect key="frame" x="0.0" y="154.5" width="300" height="28"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgA-Go-PnQ">
-                                        <rect key="frame" x="0.0" y="238.5" width="300" height="45.5"/>
+                                        <rect key="frame" x="0.0" y="214.5" width="300" height="27.5"/>
                                         <state key="normal" title="Find Location"/>
                                         <connections>
                                             <action selector="findLocationButton:" destination="BbT-fe-pP3" eventType="touchUpInside" id="ACF-f4-Pxw"/>
                                         </connections>
                                     </button>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Stc-5t-Ms6">
+                                        <rect key="frame" x="140" y="274" width="20" height="10"/>
+                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="lPB-cS-fSW" firstAttribute="width" secondItem="hUM-Yy-Lty" secondAttribute="width" id="Nb7-Bf-tXB"/>
@@ -257,6 +260,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="linkEditText" destination="lPB-cS-fSW" id="m9I-Uv-vMN"/>
+                        <outlet property="loadingView" destination="Stc-5t-Ms6" id="Mvu-5h-i9m"/>
                         <outlet property="locationEditText" destination="ltm-9R-6eq" id="GYU-Zz-Y0H"/>
                         <segue destination="OVb-6c-FOQ" kind="show" identifier="findLocation" id="22s-87-2bf"/>
                     </connections>
@@ -279,6 +283,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psJ-an-mdE">
                                 <rect key="frame" x="30" y="504" width="260" height="44"/>
                                 <state key="normal" title="Finish"/>
+                                <connections>
+                                    <action selector="fenishButton:" destination="OVb-6c-FOQ" eventType="touchUpInside" id="KBt-Ta-PIy"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -294,6 +301,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Sap-Xd-osb"/>
                     </view>
+                    <connections>
+                        <outlet property="mapView" destination="zZP-X5-jJ3" id="J14-bn-mKe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1te-lW-un5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

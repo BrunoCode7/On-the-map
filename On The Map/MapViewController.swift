@@ -114,29 +114,34 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         var annotations = [MKPointAnnotation]()
         
         for location in locations {
-            let lat = CLLocationDegrees(exactly: location.latitude!)
-            let long = CLLocationDegrees(exactly: location.longitude!)
             
-            let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
-            
-            let annotation = MKPointAnnotation()
-
-            if let firstName = location.firstName,let lastName = location.lastName{
-                            annotation.title = "\(firstName) \(lastName)"
-            }else{
-                annotation.title = ""
+            if let latitude = location.latitude , let longitude = location.longitude{
+                let lat = CLLocationDegrees(exactly:latitude)
+                let long = CLLocationDegrees(exactly: longitude)
+                
+                let coordinate = CLLocationCoordinate2D(latitude: lat!, longitude: long!)
+                
+                let annotation = MKPointAnnotation()
+                
+                if let firstName = location.firstName,let lastName = location.lastName{
+                    annotation.title = "\(firstName) \(lastName)"
+                }else{
+                    annotation.title = ""
+                }
+                
+                if let mediaURL = location.mediaURL{
+                    annotation.subtitle = mediaURL
+                }else{
+                    annotation.subtitle = ""
+                    
+                }
+                
+                annotation.coordinate = coordinate
+                
+                annotations.append(annotation)
+                
             }
-            
-            if let mediaURL = location.mediaURL{
-                annotation.subtitle = mediaURL
-            }else{
-                annotation.subtitle = ""
 
-            }
-            
-            annotation.coordinate = coordinate
-            
-            annotations.append(annotation)
             
         }
         if theMapview.annotations.count != 0 {

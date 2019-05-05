@@ -11,14 +11,18 @@ import MapKit
 
 class FindLocationViewController: UIViewController {
     var geocoder = CLGeocoder()
+    private var gLink = String()
+    private var gLocation = CLLocation()
+    private var gAddress = String()
 
+    @IBOutlet weak var loadingView: UIActivityIndicatorView!
     @IBOutlet weak var locationEditText: UITextField!
     
     @IBOutlet weak var linkEditText: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        isLoading(isLoading: false)
         // Do any additional setup after loading the view.
     }
     
@@ -36,31 +40,51 @@ class FindLocationViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBAction func findLocationButton(_ sender: Any) {
+        isLoading(isLoading: true)
         guard let address = locationEditText.text else{
             showSimpleAlert("Error", "Please enter your address")
             return
         }
         guard let Link = linkEditText.text else{
-            showSimpleAlert("Error", "Please enter your address")
+            showSimpleAlert("Error", "Please enter your link")
             return
         }
-        geocoder.geocodeAddressString(address) { (placemarkers, error) in
-            if let error = error{
-                self.showSimpleAlert("Error", "Failed to geocode the address")
-                print(error.localizedDescription)
-            }else{
-                var location:CLLocation?
-                if let placemarks = placemarkers, placemarks.count > 0 {
-                    location = placemarks.first?.location
-                }
-                if let location = location {
-                    print(location.coordinate)
+        
+        if Link == "" || address == ""{
+            showSimpleAlert("Error", "Please fill all fields")
+        } else{
+            geocoder.geocodeAddressString(address) { (placemarkers, error) in
+                if let error = error{
+                    self.isLoading(isLoading: false)
+                    self.showSimpleAlert("Error", "Failed to geocode the address")
+                    print(error.localizedDescription)
                 }else{
-                    self.showSimpleAlert("Error", "No matching location found")
+                    self.isLoading(isLoading: false)
+                    var location:CLLocation?
+                    if let placemarks = placemarkers, placemarks.count > 0 {
+                        location = placemarks.first?.location
+                    }
+                    if let location = location {
+                        self.gLocation=location
+                        self.gLink = Link
+                        self.gAddress = address
+                    self.performSegue(withIdentifier: "findLocation", sender: self)
+                    }else{
+                        self.showSimpleAlert("Error", "No matching location found")
+                    }
                 }
-            }
-        }
+            }        }
 
+
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "findLocation"{
+            let controller = segue.destination as! PostLocationViewController
+            controller.Link = gLink
+            controller.location = gLocation
+            controller.Address = gAddress
+        }
     }
     //helper function to show simple alerts
     private func showSimpleAlert(_ title:String, _ messege:String){
@@ -70,5 +94,13 @@ class FindLocationViewController: UIViewController {
         }
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func isLoading(isLoading:Bool){
+        if isLoading{
+            loadingView.isHidden = false
+        }else{
+            loadingView.isHidden = true
+        }
     }
 }
