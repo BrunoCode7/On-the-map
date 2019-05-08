@@ -68,18 +68,14 @@
 		4555EC46225E018A00A89DF5 /* On The Map */ = {
 			isa = PBXGroup;
 			children = (
+				EDC6F89022833CF400127255 /* Utilities */,
+				EDC6F88F22833CB500127255 /* ViewContrlollers */,
 				45959962225F3D4700F4765D /* Models */,
 				4555EC47225E018A00A89DF5 /* AppDelegate.swift */,
-				4555EC49225E018A00A89DF5 /* LoginViewController.swift */,
 				4555EC4B225E018B00A89DF5 /* Main.storyboard */,
 				4555EC4E225E01C500A89DF5 /* Assets.xcassets */,
 				4555EC50225E01C500A89DF5 /* LaunchScreen.storyboard */,
 				4555EC53225E01C500A89DF5 /* Info.plist */,
-				ED1928D622703563008FDC28 /* MapViewController.swift */,
-				ED1928D822703594008FDC28 /* TableViewController.swift */,
-				EDC6F8892279E6B400127255 /* TableViewCell.swift */,
-				EDC6F88B227C6E4D00127255 /* FindLocationViewController.swift */,
-				EDC6F88D227C6E9B00127255 /* PostLocationViewController.swift */,
 			);
 			path = "On The Map";
 			sourceTree = "<group>";
@@ -115,6 +111,26 @@
 				EDC6F88722796BFC00127255 /* ParseClient.swift */,
 			);
 			path = Parse;
+			sourceTree = "<group>";
+		};
+		EDC6F88F22833CB500127255 /* ViewContrlollers */ = {
+			isa = PBXGroup;
+			children = (
+				4555EC49225E018A00A89DF5 /* LoginViewController.swift */,
+				ED1928D622703563008FDC28 /* MapViewController.swift */,
+				ED1928D822703594008FDC28 /* TableViewController.swift */,
+				EDC6F88B227C6E4D00127255 /* FindLocationViewController.swift */,
+				EDC6F88D227C6E9B00127255 /* PostLocationViewController.swift */,
+			);
+			path = ViewContrlollers;
+			sourceTree = "<group>";
+		};
+		EDC6F89022833CF400127255 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				EDC6F8892279E6B400127255 /* TableViewCell.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
