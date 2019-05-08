@@ -53,7 +53,9 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        getAndShowStudentsLocation()
+    }
     
     @IBAction func refreshMap(_ sender: Any) {
         getAndShowStudentsLocation()

@@ -24,6 +24,14 @@ struct Studentlocation : Codable{
     
 }
 
+struct PostResponse : Codable{
+    let objectId:String?
+    let createdAt:String?
+}
+
+struct PutResponse :Codable {
+    let updatedAt:String?
+}
 
 class ParseClient{
     static func getMethodForStudentsLocation(completionHandlerForStudentsLocation: @escaping (_ studentsLocation:locationResponse?,_ errorCode:Int?)->Void){
@@ -55,7 +63,6 @@ class ParseClient{
                 sendError("No data was returned by the request!",nil)
                 return
             }
-            print("this is data = \(String(describing: data)) and this is response = \(String(describing: response))")
             
             do {
                 let locations = try JSONDecoder().decode(locationResponse.self,from: data)
@@ -74,7 +81,17 @@ class ParseClient{
     
     
     static func getMethodForSingleStudentLocation(studentUniqueID:String, completionHandlerForSingleStudentLocation: @escaping (_ studentsLocation:locationResponse?,_ errorCode:Int?)->Void){
-        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?where=\(studentUniqueID)")!)
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = "parse.udacity.com"
+        components.path = "/parse/classes/StudentLocation"
+        components.queryItems = [
+            URLQueryItem(name: "where", value: "{\"uniqueKey\":\"\(studentUniqueID)\"}"),
+        ]
+        let url = components.url!
+        print(url.absoluteString)
+//        var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation?where=\(studentUniqueID)")!)
+        var request = URLRequest(url: url)
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")
         let session = URLSession.shared
@@ -102,11 +119,9 @@ class ParseClient{
                 sendError("No data was returned by the request!",nil)
                 return
             }
-            print("this is data = \(String(describing: data)) and this is response = \(String(describing: response))")
-            
             do {
                 let locations = try JSONDecoder().decode(locationResponse.self,from: data)
-                print(locations.results[0])
+                print(locations.results.debugDescription)
                 completionHandlerForSingleStudentLocation(locations,nil)
                 
             } catch {
@@ -118,7 +133,7 @@ class ParseClient{
         
     }
     
-    static func postMethodForStudentLocation(uniqueId:String, firstName:String, lastName:String, mapString:String, mediaURL:String, latitdude:Double, longitude:Double, completionHandlerForSingleStudentLocation: @escaping (_ studentsLocation:locationResponse?,_ errorCode:Int?)->Void){
+    static func postMethodForStudentLocation(uniqueId:String, firstName:String, lastName:String, mapString:String, mediaURL:String, latitdude:Double, longitude:Double, completionHandlerForSingleStudentLocation: @escaping (_ studentsLocation:PostResponse?,_ errorCode:Int?)->Void){
         var request = URLRequest(url: URL(string: "https://parse.udacity.com/parse/classes/StudentLocation")!)
         request.httpMethod = "POST"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
@@ -151,11 +166,9 @@ class ParseClient{
                 sendError("No data was returned by the request!",nil)
                 return
             }
-            print("this is data = \(String(describing: data)) and this is response = \(String(describing: response))")
             
             do {
-                let locations = try JSONDecoder().decode(locationResponse.self,from: data)
-                print(locations.results[0])
+                let locations = try JSONDecoder().decode(PostResponse.self,from: data)
                 completionHandlerForSingleStudentLocation(locations,nil)
                 
             } catch {
@@ -169,7 +182,7 @@ class ParseClient{
     
     
     
-    static func putMethodForStudentLocation(objectId:String, uniqueId:String, firstName:String, lastName:String, mapString:String, mediaURL:String, latitdude:Double, longitude:Double, completionHandlerForUpdatingSingleStudentLocation: @escaping (_ studentsLocation:locationResponse?,_ errorCode:Int?)->Void){
+    static func putMethodForStudentLocation(objectId:String, uniqueId:String, firstName:String, lastName:String, mapString:String, mediaURL:String, latitdude:Double, longitude:Double, completionHandlerForUpdatingSingleStudentLocation: @escaping (_ studentsLocation:PutResponse?,_ errorCode:Int?)->Void){
         let urlString = "https://parse.udacity.com/parse/classes/StudentLocation/\(objectId)"
         let url = URL(string: urlString)
         var request = URLRequest(url: url!)
@@ -205,11 +218,9 @@ class ParseClient{
                 sendError("No data was returned by the request!",nil)
                 return
             }
-            print("this is data = \(String(describing: data)) and this is response = \(String(describing: response))")
             
             do {
-                let locations = try JSONDecoder().decode(locationResponse.self,from: data)
-                print(locations.results[0])
+                let locations = try JSONDecoder().decode(PutResponse.self,from: data)
                 completionHandlerForUpdatingSingleStudentLocation(locations,nil)
                 
             } catch {

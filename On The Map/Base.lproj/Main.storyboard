@@ -210,30 +210,27 @@
                                 <rect key="frame" x="10" y="84" width="300" height="284"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_world" translatesAutoresizingMaskIntoConstraints="NO" id="Rm7-Ny-cLa">
-                                        <rect key="frame" x="124" y="0.0" width="52" height="62.5"/>
+                                        <rect key="frame" x="124" y="0.0" width="52" height="75"/>
                                     </imageView>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Location" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ltm-9R-6eq">
-                                        <rect key="frame" x="0.0" y="94.5" width="300" height="28"/>
+                                        <rect key="frame" x="0.0" y="107" width="300" height="34"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Link" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lPB-cS-fSW">
-                                        <rect key="frame" x="0.0" y="154.5" width="300" height="28"/>
+                                        <rect key="frame" x="0.0" y="173" width="300" height="33.5"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZgA-Go-PnQ">
-                                        <rect key="frame" x="0.0" y="214.5" width="300" height="27.5"/>
+                                        <rect key="frame" x="0.0" y="238.5" width="300" height="45.5"/>
                                         <state key="normal" title="Find Location"/>
                                         <connections>
                                             <action selector="findLocationButton:" destination="BbT-fe-pP3" eventType="touchUpInside" id="ACF-f4-Pxw"/>
                                         </connections>
                                     </button>
-                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Stc-5t-Ms6">
-                                        <rect key="frame" x="140" y="274" width="20" height="10"/>
-                                    </activityIndicatorView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="lPB-cS-fSW" firstAttribute="width" secondItem="hUM-Yy-Lty" secondAttribute="width" id="Nb7-Bf-tXB"/>
@@ -241,13 +238,18 @@
                                     <constraint firstItem="ltm-9R-6eq" firstAttribute="width" secondItem="hUM-Yy-Lty" secondAttribute="width" id="c7H-jl-NKj"/>
                                 </constraints>
                             </stackView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Stc-5t-Ms6">
+                                <rect key="frame" x="150" y="376" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Stc-5t-Ms6" firstAttribute="centerX" secondItem="MGi-WB-PPE" secondAttribute="centerX" id="3Mj-Pe-jkz"/>
                             <constraint firstItem="hUM-Yy-Lty" firstAttribute="top" secondItem="MGi-WB-PPE" secondAttribute="top" constant="20" id="J8G-BN-aKT"/>
                             <constraint firstItem="hUM-Yy-Lty" firstAttribute="leading" secondItem="MGi-WB-PPE" secondAttribute="leading" constant="10" id="O3e-Qf-iQj"/>
                             <constraint firstItem="MGi-WB-PPE" firstAttribute="trailing" secondItem="hUM-Yy-Lty" secondAttribute="trailing" constant="10" id="f1B-89-yio"/>
                             <constraint firstItem="MGi-WB-PPE" firstAttribute="bottom" secondItem="hUM-Yy-Lty" secondAttribute="bottom" constant="200" id="t4M-Rr-NGM"/>
+                            <constraint firstItem="Stc-5t-Ms6" firstAttribute="top" secondItem="hUM-Yy-Lty" secondAttribute="bottom" constant="8" id="wul-4G-mrQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MGi-WB-PPE"/>
                     </view>
@@ -284,7 +286,7 @@
                                 <rect key="frame" x="30" y="504" width="260" height="44"/>
                                 <state key="normal" title="Finish"/>
                                 <connections>
-                                    <action selector="fenishButton:" destination="OVb-6c-FOQ" eventType="touchUpInside" id="KBt-Ta-PIy"/>
+                                    <action selector="finishButton:" destination="OVb-6c-FOQ" eventType="touchUpInside" id="KBt-Ta-PIy"/>
                                 </connections>
                             </button>
                         </subviews>

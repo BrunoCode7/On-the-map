@@ -21,8 +21,9 @@ class PostLocationViewController: UIViewController,MKMapViewDelegate{
         mapView.delegate = self
             print(location)
             print(Link)
-        var annotation = MKPointAnnotation()
+        let annotation = MKPointAnnotation()
         annotation.coordinate = location.coordinate
+        annotation.title = Link
         annotation.subtitle = Address
         let regionRadius: CLLocationDistance = 1000
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
@@ -49,15 +50,6 @@ class PostLocationViewController: UIViewController,MKMapViewDelegate{
         
         return pinView
     }
-    
-    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        if control == view.rightCalloutAccessoryView {
-            let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.openURL(URL(string: toOpen)!)
-            }
-        }
-    }
     /*
     // MARK: - Navigation
 
@@ -68,18 +60,51 @@ class PostLocationViewController: UIViewController,MKMapViewDelegate{
     }
     */
 
-    @IBAction func fenishButton(_ sender: Any) {
+    @IBAction func finishButton(_ sender: Any) {
         let userUniqueKey = UserDefaults.standard.string(forKey: "userUniqueKey")
-        ParseClient.getMethodForSingleStudentLocation(studentUniqueID: userUniqueKey!) { (response, errorCode) in
-            if response != nil{
-                //already have data should update
-                
-            }else{
+        let userFirstName = UserDefaults.standard.string(forKey: "userFirstName")
+        let userLastName = UserDefaults.standard.string(forKey: "userLastName")
+//        ParseClient.getMethodForSingleStudentLocation(studentUniqueID: userUniqueKey!) { (response, errorCode) in
+//            if response != nil{
+//                print("will update data")
+//                //already have data should update
+//                ParseClient.putMethodForStudentLocation(objectId: (response?.results[0].objectId)!, uniqueId: userUniqueKey!, firstName: userFirstName!
+//                    , lastName: userLastName!, mapString: self.Address, mediaURL: self.Link, latitdude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandlerForUpdatingSingleStudentLocation: { (response, eroorCode) in
+//                        if response != nil{
+//                            print("Data updated")
+//                            self.dismiss(animated: true, completion: nil)
+//                        }
+//                        else{
+//                            self.showSimpleAlert("Error", "Failed posting data, please check your connection")
+//                        }
+//                })
+//            }else{
+//                print("will post data for the first time")
                 //first time posting data
-                
+                ParseClient.postMethodForStudentLocation(uniqueId: userUniqueKey!, firstName:  userFirstName!, lastName: userLastName!, mapString: self.Address, mediaURL: self.Link, latitdude: self.location.coordinate.latitude, longitude: self.location.coordinate.longitude, completionHandlerForSingleStudentLocation: { (response, errorCode) in
+                    if response != nil{
+                        print("Data posted")
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                    else{
+                        self.showSimpleAlert("Error", "Failed posting data, please check your connection")
+                    }
+                })
             }
-        }
-    }
+//        }
+//    }
     
+    
+    
+
+    //helper function to show simple alerts
+    private func showSimpleAlert(_ title:String, _ messege:String){
+        let alert = UIAlertController(title: title, message: messege, preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default){(action)in
+            alert.dismiss(animated: true, completion: nil)
+        }
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
     }
 

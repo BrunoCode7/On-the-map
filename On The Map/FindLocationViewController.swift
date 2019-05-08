@@ -52,6 +52,7 @@ class FindLocationViewController: UIViewController {
         
         if Link == "" || address == ""{
             showSimpleAlert("Error", "Please fill all fields")
+            self.isLoading(isLoading: false)
         } else{
             geocoder.geocodeAddressString(address) { (placemarkers, error) in
                 if let error = error{

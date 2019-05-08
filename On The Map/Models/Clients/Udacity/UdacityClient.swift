@@ -129,7 +129,6 @@ class UdacityClient{
                 sendError("No data was returned by the request!",nil)
                 return
             }
-            print("this is data = \(String(describing: data)) and this is response = \(String(describing: response))")
             let range = Range(5..<data.count)
             
             let newData = data.subdata(in: range)
@@ -150,7 +149,7 @@ class UdacityClient{
     }
     
     
-    static func taskForGETMethod(userId:String, completionHandlerForGET: @escaping (_ result: UdacityUser?, _ errorCode: Int?) -> Void){
+    static func taskForGETMethod(userId:String, completionHandlerForGET: @escaping (_ result: User?, _ errorCode: Int?) -> Void){
         let request = URLRequest(url: URL(string: "https://onthemap-api.udacity.com/v1/users/\(userId)")!)
         let session = URLSession.shared
         let task = session.dataTask(with: request) { data, response, error in
@@ -177,15 +176,11 @@ class UdacityClient{
                 sendError("No data was returned by the request!",nil)
                 return
             }
-            print("this is data = \(String(describing: data)) and this is response = \(String(describing: response))")
             let range = Range(5..<data.count)
-            
             let newData = data.subdata(in: range)
             
-            
             do {
-                let userData = try JSONDecoder().decode(UdacityUser.self,from: newData)
-                print(userData.user.first_name)
+                let userData = try JSONDecoder().decode(User.self,from: newData)
                 completionHandlerForGET(userData,nil)
             } catch {
                 print(error.localizedDescription)
@@ -194,6 +189,4 @@ class UdacityClient{
         }
         task.resume()
     }
-    
-    
 }

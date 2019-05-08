@@ -68,6 +68,10 @@ class TableViewController: UITableViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        getAndShowStudentsLocation()
+    }
+    
     private func getAndShowStudentsLocation(){
         
         ParseClient.getMethodForStudentsLocation(){

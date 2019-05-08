@@ -25,6 +25,7 @@ class LoginViewController: UIViewController {
                 if (loginSession?.account.registered) != nil{
                     self.performSegue(withIdentifier: "signedIn", sender: self)
                     UserDefaults.standard.set(loginSession?.account.key, forKey: "userUniqueKey")
+                    self.getUserData()
                 }else{
                     if errorCode==nil{
                         print("problem connecting to server")
@@ -48,8 +49,19 @@ class LoginViewController: UIViewController {
         let svc = SFSafariViewController(url: URL(string: "https://auth.udacity.com/sign-up?next=https%3A%2F%2Fclassroom.udacity.com%2Fauthenticated")!)
         present(svc, animated: true, completion: nil)
     }
-    
-    //helper function to show simple alerts
+    private func getUserData() {
+        let userUniqueKey = UserDefaults.standard.string(forKey: "userUniqueKey")
+        UdacityClient.taskForGETMethod(userId: userUniqueKey!) { (user, errorCode) in
+            if user != nil{
+                print("we got user data = \(user)")
+                UserDefaults.standard.set(user?.first_name, forKey: "userFirstName")
+                UserDefaults.standard.set(user?.last_name, forKey: "userLastName")
+                
+            }else{
+                print("failed to get user data, error code = \(errorCode)")
+            }
+        }
+    }    //helper function to show simple alerts
     private func showSimpleAlert(_ title:String, _ messege:String){
         let alert = UIAlertController(title: title, message: messege, preferredStyle: .alert)
         let action = UIAlertAction(title: "Ok", style: .default){(action)in
@@ -59,6 +71,6 @@ class LoginViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-
+    
 }
 
